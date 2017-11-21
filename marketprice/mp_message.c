@@ -312,7 +312,7 @@ static int init_market(void)
         return -__LINE__;
 
 	wrPrint("1234556\n");
-	testFunc()
+	testFunc();
 
     redisContext *context = redis_sentinel_connect_master(redis);
 
