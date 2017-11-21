@@ -92,8 +92,8 @@ int redis_sentinel_get_master_addr(redis_sentinel_t *context, redis_addr *addr)
         struct timeval timeout = { 3, 0 };
         redisContext *redis = redisConnectWithTimeout(curr->addr.host, curr->addr.port, timeout);
 
-		wrPrint("redisConnectWithTimeout: %s,%d", curr->addr.host, curr->addr.port);
-		wrPrint("redis: %x,%d", redis);
+		wrPrint("redisConnectWithTimeout: %s,%d\n", curr->addr.host, curr->addr.port);
+		wrPrint("redis: %x,%d\n", redis);
 		
         if (redis == NULL || redis->err) {
             if (redis) {
@@ -194,7 +194,7 @@ redisContext *redis_sentinel_connect_master(redis_sentinel_t *context)
         redis_addr addr;
         if (redis_sentinel_get_master_addr(context, &addr) < 0)
             return NULL;
-		wrPrint("redis addr: %s,%d", addr.host, addr.port);
+		wrPrint("redis addr: %s,%d\n", addr.host, addr.port);
 		
         struct timeval timeout = { 3, 0 };
         redisContext *redis = redisConnectWithTimeout(addr.host, addr.port, timeout);
