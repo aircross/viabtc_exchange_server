@@ -23,7 +23,7 @@
         "heartbeat_check": false
     },
     "deals": {
-        "brokers": "127.0.0.1:9093",
+        "brokers": "127.0.0.1:9092",
         "topic": "deals",
         "partition": 0
     },
