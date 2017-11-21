@@ -304,7 +304,7 @@ static int init_market(void)
     if (dict_market == NULL)
         return -__LINE__;
 
-	wrPrint("1234556");
+	wrPrint("1234556\n");
 
     redisContext *context = redis_sentinel_connect_master(redis);
     if (context == NULL)

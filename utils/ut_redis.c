@@ -184,7 +184,7 @@ int redis_sentinel_get_slave_addr(redis_sentinel_t *context, redis_addr *addr)
 
 redisContext *redis_sentinel_connect_master(redis_sentinel_t *context)
 {
-	wrPrint("redis_sentinel_connect_master: redis_sentinel_t.name, %s, db,", context.name, context.db);
+	wrPrint("redis_sentinel_connect_master: redis_sentinel_t.name, %s, db,%d\n", context.name, context.db);
 	
     for (int i = 0; i < 3; ++i) {
         redis_addr addr;
