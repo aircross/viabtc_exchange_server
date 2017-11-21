@@ -307,6 +307,8 @@ static int init_market(void)
 	wrPrint("1234556\n");
 
     redisContext *context = redis_sentinel_connect_master(redis);
+
+	wrPrint("2323\n");
     if (context == NULL)
         return -__LINE__;
     redisReply *reply = redisCmd(context, "SMEMBERS k:markets");
