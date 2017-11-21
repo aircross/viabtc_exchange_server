@@ -93,7 +93,7 @@ int redis_sentinel_get_master_addr(redis_sentinel_t *context, redis_addr *addr)
         redisContext *redis = redisConnectWithTimeout(curr->addr.host, curr->addr.port, timeout);
 
 		wrPrint("redisConnectWithTimeout: %s,%d\n", curr->addr.host, curr->addr.port);
-		wrPrint("redis: %x,%d\n", redis);
+		wrPrint("redis: %x\n", redis);
 		
         if (redis == NULL || redis->err) {
             if (redis) {
@@ -103,6 +103,8 @@ int redis_sentinel_get_master_addr(redis_sentinel_t *context, redis_addr *addr)
             continue;
         }
         redisReply *reply = redisCommand(redis, "SENTINEL get-master-addr-by-name %s", context->name);
+		wrPrint("reply: %x\n", reply);
+		
         if (reply == NULL || reply->type != REDIS_REPLY_ARRAY || reply->elements != 2) {
             if (reply) {
                 freeReplyObject(reply);
@@ -118,6 +120,7 @@ int redis_sentinel_get_master_addr(redis_sentinel_t *context, redis_addr *addr)
         freeReplyObject(reply);
         redisFree(redis);
 
+		wrPrint("redis_sentinel_get_master_addr end: 0\n");
         return 0;
     }
 
