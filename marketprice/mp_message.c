@@ -293,17 +293,15 @@ static struct market_info *create_market(const char *market)
     return info;
 }
 
+static int testFunc(){
+	for(int i = 0; i < 3; ++i){
+		wrPrint("1234556 %d\n", i);
+	}	
+
+}
+
 static int init_market(void)
 {
-	wrPrint("1234556\n");
-
-    redisContext *context = redis_sentinel_connect_master(redis);
-
-	wrPrint("2323\n");
-    if (context == NULL)
-        return -__LINE__;
-
-
     dict_types type;
     memset(&type, 0, sizeof(type));
     type.hash_function = dict_sds_key_hash_func;
@@ -313,6 +311,14 @@ static int init_market(void)
     if (dict_market == NULL)
         return -__LINE__;
 
+	wrPrint("1234556\n");
+	testFunc()
+
+    redisContext *context = redis_sentinel_connect_master(redis);
+
+	wrPrint("2323\n");
+    if (context == NULL)
+        return -__LINE__;
     redisReply *reply = redisCmd(context, "SMEMBERS k:markets");
     if (reply == NULL) {
         redisFree(context);
