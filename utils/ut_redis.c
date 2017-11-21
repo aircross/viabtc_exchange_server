@@ -91,6 +91,10 @@ int redis_sentinel_get_master_addr(redis_sentinel_t *context, redis_addr *addr)
     while (curr) {
         struct timeval timeout = { 3, 0 };
         redisContext *redis = redisConnectWithTimeout(curr->addr.host, curr->addr.port, timeout);
+
+		wrPrint("redisConnectWithTimeout: %s,%d", curr->addr.host, curr->addr.port);
+		wrPrint("redis: %x,%d", redis);
+		
         if (redis == NULL || redis->err) {
             if (redis) {
                 redisFree(redis);

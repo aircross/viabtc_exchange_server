@@ -293,13 +293,6 @@ static struct market_info *create_market(const char *market)
     return info;
 }
 
-static int testFunc(){
-	for(int i = 0; i < 3; ++i){
-		wrPrint("1234556 %d\n", i);
-	}	
-
-}
-
 static int init_market(void)
 {
     dict_types type;
@@ -312,7 +305,6 @@ static int init_market(void)
         return -__LINE__;
 
 	wrPrint("1234556\n");
-	testFunc();
 
     redisContext *context = redis_sentinel_connect_master(redis);
 
