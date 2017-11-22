@@ -15,7 +15,7 @@ clean :
 $(TARGET) : $(OBJS)
 	$(CC) $(LFLAGS) -o $@ $(OBJS) $(LIBS)
 .c.o :
-	$(CC) $(CFLAGS) -c -o $@ $< $(INCS)
+	$(CC) $(CXXFLAGS) -c -o $@ $< $(INCS)
 
 install :
 
