@@ -104,7 +104,7 @@ int redis_sentinel_get_master_addr(redis_sentinel_t *context, redis_addr *addr)
         }
         redisReply *reply = redisCommand(redis, "SENTINEL get-master-addr-by-name %s", context->name);
 		
-		wrPrint("reply: %x, reply->type:%d, reply->elements:%d\n", reply, reply->type);
+		wrPrint("reply: %x, reply->type:%d, reply->elements:%d, reply->str:%d\n", reply, reply->type, reply->str);
 		
         if (reply == NULL || reply->type != REDIS_REPLY_ARRAY || reply->elements != 2) {
             if (reply) {
