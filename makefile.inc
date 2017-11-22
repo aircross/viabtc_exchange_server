@@ -1,7 +1,7 @@
 SOURCE  := $(wildcard *.c)
 OBJS    := $(patsubst %.c, %.o, $(SOURCE))
 CC      := gcc
-CFLAGS  := -Wall -Wno-strict-aliasing -Wno-uninitialized -g -rdynamic -std=c++11
+CXXFLAGS  := -Wall -Wno-strict-aliasing -Wno-uninitialized -g -rdynamic -std=c++11
 LFLAGS  := -g -rdynamic
 
 
