@@ -1,7 +1,9 @@
 SOURCE  := $(wildcard *.c)
 OBJS    := $(patsubst %.c, %.o, $(SOURCE))
-CC      := g++
+CC      := gcc
+GG      := g++
 CXXFLAGS  := -Wall -Wno-strict-aliasing -Wno-uninitialized -g -rdynamic -std=c++11
+CFLAGS  := -Wall -Wno-strict-aliasing -Wno-uninitialized -g -rdynamic -std=c11
 LFLAGS  := -g -rdynamic
 
 
@@ -15,7 +17,7 @@ clean :
 $(TARGET) : $(OBJS)
 	$(CC) $(LFLAGS) -o $@ $(OBJS) $(LIBS)
 .c.o :
-	$(CC) $(CXXFLAGS) -c -o $@ $< $(INCS)
+	$(CC) $(CFLAGS) -c -o $@ $< $(INCS)
 
 install :
 
