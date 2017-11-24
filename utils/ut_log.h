@@ -238,9 +238,14 @@ enum {
     } \
 } while (0)
 
+/*
 # define wrPrint(fmt, args...) do { \
     printf("[wrPrint]%s:%i(%s): " fmt , __FILE__, __LINE__, __func__, ##args); \
 } while (0)
+*/
+
+# define wrPrint(fmt, args...) 
+
 
 
 # endif
