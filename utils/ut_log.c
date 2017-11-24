@@ -30,7 +30,7 @@
 
 # include "ut_log.h"
 
-# incllde <execinfo.h>		//add by wr 2017.11.24
+# include <execinfo.h>		//add by wr 2017.11.24
 
 
 dlog_t   *default_dlog;
