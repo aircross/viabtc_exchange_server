@@ -198,7 +198,7 @@ redisContext *redis_sentinel_connect_master(redis_sentinel_t *context)
         redis_addr addr;
         if (redis_sentinel_get_master_addr(context, &addr) < 0)
             return NULL;
-		wrPrint("redis addr: %s,%d\n", addr.host, addr.port);
+		wrPrint("redis addr: %s,%d  i=%d\n", addr.host, addr.port, i);
 		
         struct timeval timeout = { 3, 0 };
         redisContext *redis = redisConnectWithTimeout(addr.host, addr.port, timeout);
@@ -238,6 +238,8 @@ redisContext *redis_sentinel_connect_master(redis_sentinel_t *context)
             }
             freeReplyObject(reply);
         }
+
+		log_trace("redis_sentinel_connect_master")
 
         return redis;
     }
