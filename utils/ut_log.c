@@ -30,6 +30,9 @@
 
 # include "ut_log.h"
 
+# incllde <execinfo.h>		//add by wr 2017.11.24
+
+
 dlog_t   *default_dlog;
 int       default_dlog_flag = 0xff;
 
@@ -837,5 +840,22 @@ void dlog_flush(dlog_t *log)
 void dlog_flush_all(void)
 {
     dlog_flush(NULL);
+}
+
+
+void wrPrintStackTrace(void)
+{
+    int size = 32;
+    void * array[256];
+    int stack_num = backtrace(array, size);
+    char ** stacktrace = backtrace_symbols(array, stack_num);
+	printf("--------wrPrintStackTrace begin --------\n");
+    for (int i = 0; i < stack_num; ++i)
+    {
+        printf("%s\n", stacktrace[i]);
+    }
+	printf("--------wrPrintStackTrace end --------\n");
+    free(stacktrace);
+
 }
 

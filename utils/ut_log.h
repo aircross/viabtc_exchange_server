@@ -15,6 +15,7 @@
 # include <sys/time.h>
 # include <netinet/in.h>
 
+
 /*
  * To use this log library, you have two more things need to do.
  *
@@ -143,6 +144,8 @@ int dlog_read_flag(char *str);
 void dlog_level_up(void);
 void dlog_level_down(void);
 
+void wrPrintStackTrace(void);
+
 enum {
     DLOG_FATAL  = 0x1,
     DLOG_ERROR  = 0x2,
@@ -238,6 +241,7 @@ enum {
 # define wrPrint(fmt, args...) do { \
     printf("[wrPrint]%s:%i(%s): " fmt , __FILE__, __LINE__, __func__, ##args); \
 } while (0)
+
 
 # endif
 
