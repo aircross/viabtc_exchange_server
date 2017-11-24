@@ -52,6 +52,9 @@ int process_exist(const char *fmt, ...)
 
 int process_keepalive(void)
 {
+	wrPrint("in process_keepalive");
+
+
     while (true) {
         int pid = fork();
         if (pid < 0) {
