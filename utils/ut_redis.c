@@ -239,7 +239,7 @@ redisContext *redis_sentinel_connect_master(redis_sentinel_t *context)
             freeReplyObject(reply);
         }
 
-		log_trace("redis_sentinel_connect_master")
+		log_trace("redis_sentinel_connect_master");
 
         return redis;
     }
