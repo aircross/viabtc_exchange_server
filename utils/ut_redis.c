@@ -211,10 +211,7 @@ redisContext *redis_sentinel_connect_master(redis_sentinel_t *context)
         }
         free(addr.host);
         redisSetTimeout(redis, timeout);
-
 		
-		log_trace("redis_sentinel_connect_master 1");
-
         redisReply *reply = redisCommand(redis, "ROLE");
         if (reply == NULL || reply->type != REDIS_REPLY_ARRAY) {
             if (reply) {
@@ -224,7 +221,6 @@ redisContext *redis_sentinel_connect_master(redis_sentinel_t *context)
             return NULL;
         }
 
-		log_trace("redis_sentinel_connect_master 2");
 		
         if (strcmp(reply->element[0]->str, "master") != 0) {
             freeReplyObject(reply);
@@ -233,7 +229,6 @@ redisContext *redis_sentinel_connect_master(redis_sentinel_t *context)
         }
         freeReplyObject(reply);
 
-		log_trace("redis_sentinel_connect_master 3");
 
         if (context->db > 0) {
             reply = redisCommand(redis, "SELECT %d", context->db);
@@ -246,8 +241,6 @@ redisContext *redis_sentinel_connect_master(redis_sentinel_t *context)
             }
             freeReplyObject(reply);
         }
-
-		log_trace("redis_sentinel_connect_master4");
 
         return redis;
     }

@@ -79,6 +79,9 @@ int process_keepalive(void)
             if (WIFEXITED(status)) {
                 exit(EXIT_SUCCESS);
             } else if (WIFSIGNALED(status)) {
+            	wrPrint("process: %d, name: %s terminated by signal: '%s'", \
+                        pid, program_invocation_short_name, strsignal(WTERMSIG(status)));
+				
                 log_fatal("process: %d, name: %s terminated by signal: '%s'", \
                         pid, program_invocation_short_name, strsignal(WTERMSIG(status)));
                 usleep(1000 * 1000);
