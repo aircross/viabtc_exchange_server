@@ -3,7 +3,7 @@ OBJS    := $(patsubst %.c, %.o, $(SOURCE))
 CC      := gcc
 GG      := g++
 CXXFLAGS  := -Wall -Wno-strict-aliasing -Wno-uninitialized -g -rdynamic -std=c++11
-CFLAGS  := -Wall -Wno-strict-aliasing -Wno-uninitialized -g -rdynamic -std=gnu99
+CFLAGS  := -fPIC -Wall -Wno-strict-aliasing -Wno-uninitialized -g -rdynamic -std=gnu99
 LFLAGS  := -g -rdynamic
 
 
