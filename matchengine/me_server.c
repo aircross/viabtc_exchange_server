@@ -144,17 +144,12 @@ static int on_cmd_balance_query(nw_ses *ses, rpc_pkg *pkg, json_t *params)
     if (request_size == 0)
         return reply_error_invalid_argument(ses, pkg);
 
-	log_trace("on_cmd_balance_query 1");
-
     if (!json_is_integer(json_array_get(params, 0)))
         return reply_error_invalid_argument(ses, pkg);
-
-	log_trace("on_cmd_balance_query 2");
+	
     uint32_t user_id = json_integer_value(json_array_get(params, 0));
     if (user_id == 0)
         return reply_error_invalid_argument(ses, pkg);
-
-	log_trace("on_cmd_balance_query 3");
 
     json_t *result = json_object();
     if (request_size == 1) {
@@ -247,35 +242,50 @@ static int on_cmd_balance_update(nw_ses *ses, rpc_pkg *pkg, json_t *params)
     if (json_array_size(params) != 6)
         return reply_error_invalid_argument(ses, pkg);
 
+	log_trace("wr on_cmd_balance_update 0");
+
     // user_id
     if (!json_is_integer(json_array_get(params, 0)))
         return reply_error_invalid_argument(ses, pkg);
     uint32_t user_id = json_integer_value(json_array_get(params, 0));
 
+	log_trace("wr on_cmd_balance_update 1");
+
     // asset
     if (!json_is_string(json_array_get(params, 1)))
         return reply_error_invalid_argument(ses, pkg);
+	log_trace("wr on_cmd_balance_update 2");
+	
     const char *asset = json_string_value(json_array_get(params, 1));
     int prec = asset_prec_show(asset);
     if (prec < 0)
         return reply_error_invalid_argument(ses, pkg);
+	log_trace("wr on_cmd_balance_update 3");
 
     // business
     if (!json_is_string(json_array_get(params, 2)))
-        return reply_error_invalid_argument(ses, pkg);
+        return reply_error_invalid_argument(ses, pkg);	
+	log_trace("wr on_cmd_balance_update 4");
+	
     const char *business = json_string_value(json_array_get(params, 2));
 
     // business_id
     if (!json_is_integer(json_array_get(params, 3)))
         return reply_error_invalid_argument(ses, pkg);
+	log_trace("wr on_cmd_balance_update 5");
+
+	
     uint64_t business_id = json_integer_value(json_array_get(params, 3));
 
     // change
     if (!json_is_string(json_array_get(params, 4)))
         return reply_error_invalid_argument(ses, pkg);
+	log_trace("wr on_cmd_balance_update 6");
+	
     mpd_t *change = decimal(json_string_value(json_array_get(params, 4)), prec);
     if (change == NULL)
         return reply_error_invalid_argument(ses, pkg);
+	log_trace("wr on_cmd_balance_update 7");
 
     // detail
     json_t *detail = json_array_get(params, 5);
@@ -283,6 +293,7 @@ static int on_cmd_balance_update(nw_ses *ses, rpc_pkg *pkg, json_t *params)
         mpd_del(change);
         return reply_error_invalid_argument(ses, pkg);
     }
+	log_trace("wr on_cmd_balance_update 8");
 
     int ret = update_user_balance(true, user_id, asset, business, business_id, change, detail);
     mpd_del(change);
@@ -293,6 +304,8 @@ static int on_cmd_balance_update(nw_ses *ses, rpc_pkg *pkg, json_t *params)
     } else if (ret < 0) {
         return reply_error_internal_error(ses, pkg);
     }
+
+	log_trace("wr on_cmd_balance_update 9");
 
     append_operlog("update_balance", params);
     return reply_success(ses, pkg);
