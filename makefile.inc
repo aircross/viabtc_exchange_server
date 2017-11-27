@@ -15,9 +15,9 @@ clean :
 	rm -rf *.d *.o $(TARGET)
 
 $(TARGET) : $(OBJS)
-	$(CC) $(LFLAGS) -o $@ $(OBJS) $(LIBS)
+	$(CC) $(LFLAGS) -rdynamic -o $@ $(OBJS) $(LIBS)
 .c.o :
-	$(CC) $(CFLAGS) -c -o $@ $< $(INCS)
+	$(CC) $(CFLAGS) -rdynamic -c -o $@ $< $(INCS)
 
 install :
 
