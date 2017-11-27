@@ -64,16 +64,19 @@ static int reply_error(nw_ses *ses, rpc_pkg *pkg, int code, const char *message)
 
 static int reply_error_invalid_argument(nw_ses *ses, rpc_pkg *pkg)
 {
+	wrPrintStackTrace();
     return reply_error(ses, pkg, 1, "invalid argument");
 }
 
 static int reply_error_internal_error(nw_ses *ses, rpc_pkg *pkg)
 {
+	wrPrintStackTrace();
     return reply_error(ses, pkg, 2, "internal error");
 }
 
 static int reply_error_service_unavailable(nw_ses *ses, rpc_pkg *pkg)
 {
+	wrPrintStackTrace();
     return reply_error(ses, pkg, 3, "service unavailable");
 }
 

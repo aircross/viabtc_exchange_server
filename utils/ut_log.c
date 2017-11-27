@@ -850,7 +850,7 @@ void wrPrintStackTrace(void)
     int stack_num = backtrace(array, size);
     char ** stacktrace = backtrace_symbols(array, stack_num);
 	printf("--------wrPrintStackTrace begin --------\n");
-    for (int i = 0; i < stack_num; ++i)
+    for (int i = 1; i < stack_num; ++i)
     {
         printf("%s\n", stacktrace[i]);
     }
