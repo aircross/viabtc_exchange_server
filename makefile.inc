@@ -17,7 +17,7 @@ clean :
 $(TARGET) : $(OBJS)
 	$(CC) $(LFLAGS) -o -g -rdynamic $@ $(OBJS) $(LIBS)
 .c.o :
-	$(CC) $(CFLAGS) -c -o -g -rdynamic $@ $< $(INCS)
+	$(CC) $(CFLAGS) -c -o $@ $< $(INCS)
 
 install :
 
