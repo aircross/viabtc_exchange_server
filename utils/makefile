@@ -1,6 +1,5 @@
-TARGET  := libutils.so
+TARGET  := libutils.a
 INCS = -I ../network  -I ../depends
 include ../makefile.inc
 $(TARGET) : $(OBJS)
-#	ar -rs $@ $^
-	-fPIC -shared -o $@ $^
+	ar -rs $@ $^
