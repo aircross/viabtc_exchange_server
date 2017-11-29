@@ -90,11 +90,7 @@ int redis_sentinel_get_master_addr(redis_sentinel_t *context, redis_addr *addr)
     redis_sentinel_node *curr = context->list;
     while (curr) {
         struct timeval timeout = { 3, 0 };
-        redisContext *redis = redisConnectWithTimeout(curr->addr.host, curr->addr.port, timeout);
-
-		wrPrint("redisConnectWithTimeout: %s,%d\n", curr->addr.host, curr->addr.port);
-		wrPrint("redis: %x\n", redis);
-		
+        redisContext *redis = redisConnectWithTimeout(curr->addr.host, curr->addr.port, timeout);		
         if (redis == NULL || redis->err) {
             if (redis) {
                 redisFree(redis);
@@ -102,10 +98,8 @@ int redis_sentinel_get_master_addr(redis_sentinel_t *context, redis_addr *addr)
             curr = curr->next;
             continue;
         }
-        redisReply *reply = redisCommand(redis, "SENTINEL get-master-addr-by-name %s", context->name);
 		
-		wrPrint("reply: %x, reply->type:%d, reply->elements:%d, reply->str:%s\n", reply, reply->type, reply->str);
-		
+        redisReply *reply = redisCommand(redis, "SENTINEL get-master-addr-by-name %s", context->name);		
         if (reply == NULL || reply->type != REDIS_REPLY_ARRAY || reply->elements != 2) {
             if (reply) {
                 freeReplyObject(reply);
@@ -121,7 +115,6 @@ int redis_sentinel_get_master_addr(redis_sentinel_t *context, redis_addr *addr)
         freeReplyObject(reply);
         redisFree(redis);
 
-		wrPrint("redis_sentinel_get_master_addr end: 0\n");
         return 0;
     }
 
@@ -191,15 +184,11 @@ int redis_sentinel_get_slave_addr(redis_sentinel_t *context, redis_addr *addr)
 }
 
 redisContext *redis_sentinel_connect_master(redis_sentinel_t *context)
-{
-	wrPrint("redis_sentinel_connect_master: redis_sentinel_t.name, %s, db,%d\n", context->name, context->db);
-	//wrPrintStackTrace();
-	
+{	
     for (int i = 0; i < 3; ++i) {
         redis_addr addr;
         if (redis_sentinel_get_master_addr(context, &addr) < 0)
             return NULL;
-		wrPrint("redis addr: %s,%d  i=%d\n", addr.host, addr.port, i);
 		
         struct timeval timeout = { 3, 0 };
         redisContext *redis = redisConnectWithTimeout(addr.host, addr.port, timeout);
