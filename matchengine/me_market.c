@@ -258,14 +258,28 @@ static int order_finish(bool real, market_t *m, order_t *order)
 
 market_t *market_create(struct market *conf)
 {
+	
+	log_trace("---------------wr market_create: %s---------------\n", conf->name);
+	log_trace("stock_prec: %d\n", conf->stock_prec);
+	log_trace("money_prec: %d\n", conf->money_prec);
+	log_trace("fee_prec: %d\n", conf->fee_prec);
+	log_trace("\n\n");
     if (!asset_exist(conf->stock) || !asset_exist(conf->money))
         return NULL;
-    if (conf->stock_prec + conf->money_prec > asset_prec(conf->money))
+    if (conf->stock_prec + conf->money_prec > asset_prec(conf->money))	
         return NULL;
+	
+	log_trace("conf->money: %s, asset_prec(conf->money): %d\n", conf->money, asset_prec(conf->money));
+	
     if (conf->stock_prec + conf->fee_prec > asset_prec(conf->stock))
         return NULL;
+
+	log_trace("conf->stock: %s, asset_prec(conf->stock): %d\n", conf->stock, asset_prec(conf->stock));
+	
     if (conf->money_prec + conf->fee_prec > asset_prec(conf->money))
         return NULL;
+
+	log_trace("conf->money: %s, asset_prec(conf->money): %d\n", conf->money, asset_prec(conf->money));
 
     market_t *m = malloc(sizeof(market_t));
     memset(m, 0, sizeof(market_t));
