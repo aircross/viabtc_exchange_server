@@ -42,7 +42,7 @@
             "prec_show": 8
         }, {
             "name": "BTC",
-            "prec_save": 6,
+            "prec_save": 10,
             "prec_show": 6
         }, {
             "name": "LTC",
