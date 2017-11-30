@@ -81,7 +81,8 @@
                 "name": "BCH",
                 "prec": 8
             },
-            "min_amount": "0.001"
+            "min_amount": "0.001",
+            "fee_prec": 4
         }, {
             "name": "LTCBCH",
             "stock": {
@@ -92,7 +93,8 @@
                 "name": "BCH",
                 "prec": 8
             },
-            "min_amount": "0.001"
+            "min_amount": "0.001",
+            "fee_prec": 4
         }, {
             "name": "ETHBCH",
             "stock": {
@@ -103,7 +105,8 @@
                 "name": "BCH",
                 "prec": 8
             },
-            "min_amount": "0.001"
+            "min_amount": "0.001",
+            "fee_prec": 4
         }, {
             "name": "ETCBCH",
             "stock": {
@@ -114,7 +117,8 @@
                 "name": "BCH",
                 "prec": 8
             },
-            "min_amount": "0.001"
+            "min_amount": "0.001",
+            "fee_prec": 4
         }, {
             "name": "ZECBCH",
             "stock": {
@@ -125,7 +129,8 @@
                 "name": "BCH",
                 "prec": 8
             },
-            "min_amount": "0.001"
+            "min_amount": "0.001",
+            "fee_prec": 4
         }, {
             "name": "XMRBCH",
             "stock": {
@@ -136,7 +141,8 @@
                 "name": "BCH",
                 "prec": 8
             },
-            "min_amount": "0.001"
+            "min_amount": "0.001",
+            "fee_prec": 4
         }, {
             "name": "DASHBCH",
             "stock": {
@@ -147,7 +153,8 @@
                 "name": "BCH",
                 "prec": 8
             },
-            "min_amount": "0.001"
+            "min_amount": "0.001",
+            "fee_prec": 4
         }
     ],
     "brokers": "127.0.0.1:9092",
