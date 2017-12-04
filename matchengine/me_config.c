@@ -185,7 +185,6 @@ int parse_sy_reply(sds reply){
 		printf("parse_sy_reply, content_node get faild \n");
         return -__LINE__;
     }
-
 	
 	return read_config_from_json(content_node);
 }
