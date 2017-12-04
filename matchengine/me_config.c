@@ -168,7 +168,6 @@ int init_config(const char *path)
 
 int parse_sy_reply(sds reply){	
 	int code=0;
-	printf("reply is %s\n", reply);
 	json_t *result = json_loads(reply, 0, NULL);
 	if (result == NULL){
 		printf("parse_sy_reply, json_loads fail\n");
