@@ -229,7 +229,6 @@ int read_sy_config(json_t *root){
 
 int init_config_from_url(const char *path){
     json_error_t error;
-	char* config_url = NULL;
     json_t *root = json_load_file(path, 0, &error);
     if (root == NULL) {
         printf("init_config_from_url from: %s fail: %s in line: %d\n", path, error.text, error.line);
