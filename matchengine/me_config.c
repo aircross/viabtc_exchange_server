@@ -166,7 +166,7 @@ int init_config(const char *path)
     return 0;
 }
 
-int parse_sy_reply(sds* reply){	
+int parse_sy_reply(sds reply){	
 	int code=0;
 	printf("reply is %s\n", reply);
 	json_t *result = json_loads(reply, 0, NULL);
@@ -213,7 +213,7 @@ int get_config_from_url(){
 		goto cleanup;
 	}
 	
-	ret = parse_sy_reply(&reply);
+	ret = parse_sy_reply(reply);
         
 	cleanup:
 	curl_easy_cleanup(curl);
