@@ -85,6 +85,8 @@ struct settings {
     int                 slice_keeptime;
     int                 history_thread;
     double              cache_timeout;
+
+	char*				sy_config_url;
 };
 
 extern struct settings settings;

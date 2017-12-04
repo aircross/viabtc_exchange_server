@@ -2,10 +2,11 @@
  * Description: 
  *     History: yang@haipo.me, 2017/03/16, create
  */
-
+# include <curl/curl.h>
 # include "me_config.h"
 
 struct settings settings;
+
 
 static int load_assets(json_t *root, const char *key)
 {
@@ -163,5 +164,91 @@ int init_config(const char *path)
     json_decref(root);
 
     return 0;
+}
+
+int parse_sy_reply(sds* reply){	
+	int retCode=0;
+	json_t *result = json_loads(reply, 0, NULL);
+	if (result == NULL){
+		printf("parse_sy_reply, json_loads fail\n");
+		return = -__LINE__;
+	}
+
+	read_cfg_int(result, "Code", &retCode, true, 0);
+	if(1100 != retCode){
+		printf("parse_sy_reply, 1100 != retCode\n");
+		return = -__LINE__;
+	}
+
+	json_t *content_node = json_object_get(root, "Content");
+    if (!content_node || !json_is_object(content_node)) {
+		printf("parse_sy_reply, content_node get faild \n");
+        return -__LINE__;
+    }
+
+	ret = read_config_from_json(content_node);
+
+	return 0;
+}
+
+size_t config_callback(void *ptr, size_t size, size_t nmemb, void *userdata){
+    sds *reply = userdata;
+    *reply = sdscatlen(*reply, ptr, size * nmemb);
+    return size * nmemb;
+}
+
+int get_config_from_url(){
+	int ret=0
+	sds reply = sdsempty();
+
+	CURL *curl = curl_easy_init();
+	curl_easy_setopt(curl, CURLOPT_URL, url);	
+	curl_easy_setopt(curl, CURLOPT_WRITEFUNCTION, config_callback);
+	curl_easy_setopt(curl, CURLOPT_WRITEDATA, &reply);
+
+	CURLcode ret = curl_easy_perform(curl);
+	if (ret != CURLE_OK) {
+		printf("get_config_from_url curl_easy_perform fail: %s\n", curl_easy_strerror(ret));
+		ret = -__LINE__;
+		goto cleanup;
+	}
+	
+	ret = parse_sy_reply(&reply);
+        
+	cleanup:
+	curl_easy_cleanup(curl);
+	sdsfree(reply);
+
+	return ret;
+}
+
+int read_sy_config(json_t *root){
+	ERR_RET(read_cfg_str(root, "config_url", &settings.sy_config_url, NULL));
+	ERR_RET(get_config_from_url());
+	return 0;
+}
+
+int init_config_from_url(){
+    json_error_t error;
+	char* config_url = NULL;
+    json_t *root = json_load_file(path, 0, &error);
+    if (root == NULL) {
+        printf("init_config_from_url from: %s fail: %s in line: %d\n", path, error.text, error.line);
+        return -__LINE__;
+    }
+    if (!json_is_object(root)) {
+        json_decref(root);
+        return -__LINE__;
+    }
+
+    int ret = read_url_from_json(root);
+    if (ret < 0) {
+        json_decref(root);
+        return ret;
+    }
+    json_decref(root);
+
+    return 0;
+
 }
 

@@ -75,7 +75,7 @@ int main(int argc, char *argv[])
     if (ret < 0) {
         error(EXIT_FAILURE, errno, "init mpd fail: %d", ret);
     }
-    ret = init_config(argv[1]);
+    ret = init_config_from_url(argv[1]);
     if (ret < 0) {
         error(EXIT_FAILURE, errno, "load config fail: %d", ret);
     }
