@@ -167,28 +167,27 @@ int init_config(const char *path)
 }
 
 int parse_sy_reply(sds* reply){	
-	int retCode=0;
+	int code=0;
 	json_t *result = json_loads(reply, 0, NULL);
 	if (result == NULL){
 		printf("parse_sy_reply, json_loads fail\n");
-		return = -__LINE__;
+		return -__LINE__;
 	}
 
-	read_cfg_int(result, "Code", &retCode, true, 0);
+	read_cfg_int(result, "Code", &code, true, 0);
 	if(1100 != retCode){
 		printf("parse_sy_reply, 1100 != retCode\n");
-		return = -__LINE__;
+		return -__LINE__;
 	}
 
-	json_t *content_node = json_object_get(root, "Content");
+	json_t *content_node = json_object_get(result, "Content");
     if (!content_node || !json_is_object(content_node)) {
 		printf("parse_sy_reply, content_node get faild \n");
         return -__LINE__;
     }
 
-	ret = read_config_from_json(content_node);
-
-	return 0;
+	
+	return read_config_from_json(content_node);
 }
 
 size_t config_callback(void *ptr, size_t size, size_t nmemb, void *userdata){
@@ -198,7 +197,7 @@ size_t config_callback(void *ptr, size_t size, size_t nmemb, void *userdata){
 }
 
 int get_config_from_url(){
-	int ret=0
+	int ret=0;
 	sds reply = sdsempty();
 
 	CURL *curl = curl_easy_init();
