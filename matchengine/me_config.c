@@ -240,7 +240,7 @@ int init_config_from_url(const char *path){
         return -__LINE__;
     }
 
-    int ret = read_url_from_json(root);
+    int ret = read_sy_config(root);
     if (ret < 0) {
         json_decref(root);
         return ret;
