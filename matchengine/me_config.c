@@ -175,7 +175,7 @@ int parse_sy_reply(sds* reply){
 	}
 
 	read_cfg_int(result, "Code", &code, true, 0);
-	if(1100 != retCode){
+	if(1100 != code){
 		printf("parse_sy_reply, 1100 != retCode\n");
 		return -__LINE__;
 	}
@@ -201,13 +201,13 @@ int get_config_from_url(){
 	sds reply = sdsempty();
 
 	CURL *curl = curl_easy_init();
-	curl_easy_setopt(curl, CURLOPT_URL, url);	
+	curl_easy_setopt(curl, CURLOPT_URL, settings.sy_config_url);	
 	curl_easy_setopt(curl, CURLOPT_WRITEFUNCTION, config_callback);
 	curl_easy_setopt(curl, CURLOPT_WRITEDATA, &reply);
 
-	CURLcode ret = curl_easy_perform(curl);
+	CURLcode url_ret = curl_easy_perform(curl);
 	if (ret != CURLE_OK) {
-		printf("get_config_from_url curl_easy_perform fail: %s\n", curl_easy_strerror(ret));
+		printf("get_config_from_url curl_easy_perform fail: %s\n", curl_easy_strerror(url_ret));
 		ret = -__LINE__;
 		goto cleanup;
 	}
@@ -227,7 +227,7 @@ int read_sy_config(json_t *root){
 	return 0;
 }
 
-int init_config_from_url(){
+int init_config_from_url(const char *path){
     json_error_t error;
 	char* config_url = NULL;
     json_t *root = json_load_file(path, 0, &error);
