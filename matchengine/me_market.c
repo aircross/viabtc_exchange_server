@@ -266,19 +266,15 @@ market_t *market_create(struct market *conf)
 	log_trace("\n\n");
 	*/
 
-	printf("begin markets:%s\n", conf->name);
+	//printf("begin markets:%s\n", conf->name);
     if (!asset_exist(conf->stock) || !asset_exist(conf->money))
         return NULL;
-	printf("begin markets: 1\n");
     if (conf->stock_prec + conf->money_prec > asset_prec(conf->money))	
         return NULL;	
-	printf("begin markets: 2\n");
     if (conf->stock_prec + conf->fee_prec > asset_prec(conf->stock))
         return NULL;	
-	printf("begin markets: 3\n");
     if (conf->money_prec + conf->fee_prec > asset_prec(conf->money))
         return NULL;
-	printf("begin markets: 4\n");
 
 	/*
 	log_trace("conf->money: %s, asset_prec(conf->money): %d\n", conf->money, asset_prec(conf->money));
@@ -307,7 +303,6 @@ market_t *market_create(struct market *conf)
     m->users = dict_create(&dt, 1024);
     if (m->users == NULL)
         return NULL;
-	printf("begin markets: 5\n");
 
     memset(&dt, 0, sizeof(dt));
     dt.hash_function    = dict_order_hash_function;
@@ -318,8 +313,6 @@ market_t *market_create(struct market *conf)
     m->orders = dict_create(&dt, 1024);
     if (m->orders == NULL)
         return NULL;
-	
-	printf("begin markets: 6\n");
 
     skiplist_type lt;
     memset(&lt, 0, sizeof(lt));
@@ -329,7 +322,6 @@ market_t *market_create(struct market *conf)
     m->bids = skiplist_create(&lt);
     if (m->asks == NULL || m->bids == NULL)
         return NULL;
-	printf("begin markets: 7\n");
 
     return m;
 }
