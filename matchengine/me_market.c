@@ -265,6 +265,8 @@ market_t *market_create(struct market *conf)
 	log_trace("fee_prec: %d\n", conf->fee_prec);
 	log_trace("\n\n");
 	*/
+
+	printf("begin markets:%s\n", conf->name);
     if (!asset_exist(conf->stock) || !asset_exist(conf->money))
         return NULL;
     if (conf->stock_prec + conf->money_prec > asset_prec(conf->money))	
