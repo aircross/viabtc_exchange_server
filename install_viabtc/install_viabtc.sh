@@ -1,8 +1,9 @@
 #!/usr/bin/env bash
 set -e
 basepath=$(cd `dirname $0`; pwd)
+projectpath=$(dirname $basepath)
 echo $basepath
-echo $(pwd)
+echo $projectpath
 
 #function install(){
 #    if [ $1 = "accesshttp" ]; then
