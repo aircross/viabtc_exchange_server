@@ -1,6 +1,7 @@
 #!/usr/bin/env bash
 set -e
-basepath=$(cd `dirname $0`; pwd/..)
+basepath=$(cd `dirname $0`; pwd)
+echo $basepath
 echo $(pwd)
 
 #function install(){
