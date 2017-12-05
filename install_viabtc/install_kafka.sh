@@ -2,18 +2,22 @@
 set -e
 destDir="/usr/local/kafka"
 if [ -d "$destDir" ]; then
-    echo "the /usr/local/kafka directory already exists"
+    echo "the '/usr/local/kafka' directory already exists"
     exit 1
 fi
 
-echo "123343dfdd"
-#yum install wget tar java-1.8.0-openjdk -y
-#
-#fileUrl="http://mirrors.hust.edu.cn/apache/kafka/1.0.0/kafka_2.11-1.0.0.tgz"
-#filename=$(basename $fileUrl)
-#if [ ! -f "$filename" ]; then
-#    wget $fileUrl
-#fi
+yum install wget tar java-1.8.0-openjdk -y
+
+fileUrl="http://mirrors.hust.edu.cn/apache/kafka/1.0.0/kafka_2.11-1.0.0.tgz"
+filename=$(basename $fileUrl)
+if [ ! -f "$filename" ]; then
+    wget $fileUrl
+fi
+
+filedir=$(dirname $filename)
+if [ ! -d "$filedir" ]; then
+    echo "22222222"
+fi
 #tar -zxvf $filename
 
 
