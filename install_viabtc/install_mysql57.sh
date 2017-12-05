@@ -1,13 +1,13 @@
 #!/usr/bin/env bash
 set -e
-file="./mysql57-community-release-el7-11.noarch.rpm"
+fileUrl="https://dev.mysql.com/get/mysql57-community-release-el7-11.noarch.rpm"
+filename=$(basename $fileUrl)
 
-if  [ ! -f "$file" ]; then
+if  [ ! -f "$filename" ]; then
   yum install wget -y
-  wget https://dev.mysql.com/get/mysql57-community-release-el7-11.noarch.rpm
+  wget $fileUrl
 fi
 
-var="rpm -ivh mysql57-community-release-el7-11.noarch.rpm"
-#echo $var
+yum install mysql-community-client mysql-community-devel -y
 
-yum install mysql-community-server mysql-community-client mysql-community-devel -y
+echo "install and mysqlclient complate"
