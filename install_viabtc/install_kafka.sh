@@ -26,4 +26,4 @@ mv "./$uncompressDirName" /usr/local/kafka
 /usr/local/kafka/bin/zookeeper-server-start.sh -daemon /usr/local/kafka/config/zookeeper.properties
 /usr/local/kafka/bin/kafka-server-start.sh -daemon /usr/local/kafka/config/server.properties
 
-echo "install kafka complate"
+echo "install and start kafka complate"
