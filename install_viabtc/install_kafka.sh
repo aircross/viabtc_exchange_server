@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 set -e
 destDir="/usr/local/kafka"
-if [ -d "$filename" ]; then
+if [ -d "$destDir" ]; then
     echo "the /usr/local/kafka directory already exists"
     exit 1
 fi
