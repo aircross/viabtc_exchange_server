@@ -10,16 +10,18 @@ yum install wget tar java-1.8.0-openjdk -y
 fileUrl="http://mirrors.hust.edu.cn/apache/kafka/1.0.0/kafka_2.11-1.0.0.tgz"
 compressFileName=$(basename $fileUrl)
 if [ ! -f "$compressFileName" ]; then
+    echo "have not $compressFileName and begin download from $fileUrl"
     wget $fileUrl
 fi
 
 fileExtName=${fileUrl##*.}
 uncompressDirName=$(basename $fileUrl)
-
 if [ ! -d "$uncompressDirName" ]; then
+    echo "have not $uncompressDirName and begin Unzip the files $compressFileName"
     tar -zxvf $compressFileName
 fi
 
-mv $uncompressDirName /usr/local/kafka
+echo "begin mv ./$uncompressDirName to /usr/local/kafka"
+mv "./$uncompressDirName" /usr/local/kafka
 /usr/local/kafka/bin/zookeeper-server-start.sh -daemon /usr/local/kafka/config/zookeeper.properties
 /usr/local/kafka/bin/kafka-server-start.sh -daemon /usr/local/kafka/config/server.properties
