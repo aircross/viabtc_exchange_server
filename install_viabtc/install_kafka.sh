@@ -7,7 +7,7 @@ filename=$(basename $fileUrl)
 if [ ! -f "$filename" ]; then
     wget $fileUrl
 else
-    tar -zxvf $fileUrl
+    tar -zxvf $filename
 fi
 
 #tar -zxvf kafka_2.11-1.0.0.tgz
