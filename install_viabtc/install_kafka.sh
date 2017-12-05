@@ -3,7 +3,7 @@ set -e
 yum install wget tar java-1.8.0-openjdk -y
 
 fileUrl="http://mirrors.hust.edu.cn/apache/kafka/1.0.0/kafka_2.11-1.0.0.tgz"
-filename= $(basename $fileUrl)
+filename=$(basename $fileUrl)
 if [ ! -f "$filename" ]; then
     echo 111
 else
