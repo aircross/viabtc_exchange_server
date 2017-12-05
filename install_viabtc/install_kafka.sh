@@ -15,7 +15,7 @@ if [ ! -f "$compressFileName" ]; then
 fi
 
 fileExtName=${fileUrl##*.}
-uncompressDirName=$(basename $fileUrl)
+uncompressDirName=$(basename $fileUrl ".$fileExtName")
 if [ ! -d "$uncompressDirName" ]; then
     echo "have not $uncompressDirName and begin Unzip the files $compressFileName"
     tar -zxvf $compressFileName
