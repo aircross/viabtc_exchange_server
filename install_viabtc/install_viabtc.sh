@@ -10,7 +10,7 @@ function install(){
             if [ $1 = process ]; then
                 ./install_depends.sh
                 echo "begin compile $1"
-                cd $projectpath/process
+                cd $projectpath/$process
                 make -j4
                 return 0
             fi
@@ -21,7 +21,7 @@ function install(){
         echo "./install_depends.sh end"
         for process in ${processArray[@]}
         do
-            cd $projectpath/process
+            cd $projectpath/$process
             make -j4
         done
         return 0
