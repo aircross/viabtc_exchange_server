@@ -409,7 +409,9 @@ static void on_timer(nw_timer *timer, void *privdata)
     if ((now - last_slice_time) >= settings.slice_interval && (now % settings.slice_interval) <= 5) {
         make_slice(now);
         last_slice_time = now;
+		log_trace("wr init_persist.on_timer  not in ");
     }
+	log_trace("wr init_persist on_timer");
 }
 
 int init_persist(void)
