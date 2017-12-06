@@ -410,7 +410,7 @@ static void on_timer(nw_timer *timer, void *privdata)
         make_slice(now);
         last_slice_time = now;
     }
-	log_trace("wr init_persist on_timer %ld ,%ld, %d", now, last_slice_time, settings.slice_interval);
+	//log_trace("wr init_persist on_timer %ld ,%ld, %d", now, last_slice_time, settings.slice_interval);
 }
 
 int init_persist(void)
