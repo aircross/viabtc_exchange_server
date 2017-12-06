@@ -174,7 +174,7 @@ int parse_sy_reply(sds reply){
 		return -__LINE__;
 	}
 
-	read_cfg_int(result, "Code", &code, true, 0);
+	read_cfg_int(result, "ErrorCode", &code, true, 0);
 	if(1100 != code){
 		printf("parse_sy_reply, 1100 != retCode\n");
 		return -__LINE__;
