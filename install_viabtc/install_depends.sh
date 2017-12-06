@@ -3,6 +3,11 @@ set -e
 basepath=$(cd `dirname $0`; pwd)
 projectpath=$(dirname $basepath)
 
+yum install wget -y
+wget -O /etc/yum.repos.d/epel-7.repo http://mirrors.aliyun.com/repo/epel-7.repo
+yum clean all
+yum makecache
+
 yum install librdkafka librdkafka-devel libcurl libcurl-devel libev libev-devel jansson jansson-devel mpdecimal mpdecimal-devel -y
 
 cd $projectpath/depends/hiredis
