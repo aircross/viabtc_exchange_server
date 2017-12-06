@@ -24,9 +24,9 @@
     },
     "db_history": {
         "host": "localhost",
-        "user": "root",
-        "pass": "shit",
-        "name": "trade_history"
+        "user": "hotbit_make",
+        "pass": "hotbit_make_20171205",
+        "name": "hotbit_make_engine"
     },
     "worker_num": 10
 }

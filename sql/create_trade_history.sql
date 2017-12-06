@@ -1,4 +1,4 @@
-USE trade_history;
+USE hotbit_make_engine;
 CREATE TABLE `balance_history_example` (
     `id`            BIGINT UNSIGNED NOT NULL PRIMARY KEY AUTO_INCREMENT,
     `time`          DOUBLE NOT NULL,

@@ -8,6 +8,7 @@ if  [ ! -f "$filename" ]; then
   wget $fileUrl
 fi
 
+yum localinstall mysql57-community-release-el7-11.noarch.rpm
 yum install mysql-community-client mysql-community-devel -y
 
 mysqlclient="/usr/lib64/libmysqlclient.so"
