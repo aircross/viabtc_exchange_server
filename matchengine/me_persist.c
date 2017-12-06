@@ -60,6 +60,7 @@ static int get_last_slice(MYSQL *conn, time_t *timestamp, uint64_t *last_oper_id
 static int load_slice_from_db(MYSQL *conn, time_t timestamp)
 {
     sds table = sdsempty();
+	log_trace("wr load_slice_from_db");
 
     table = sdscatprintf(table, "slice_order_%ld", timestamp);
     log_stderr("load orders from: %s", table);
@@ -83,6 +84,7 @@ static int load_slice_from_db(MYSQL *conn, time_t timestamp)
     }
 
     sdsfree(table);
+	log_trace("wr load_slice_from_db end");
     return 0;
 }
 
