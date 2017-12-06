@@ -23,7 +23,7 @@
         "heartbeat_check": false
     },
     "db_history": {
-        "host": "localhost",
+        "host": "rm-wz900j5wutr7o38di.mysql.rds.aliyuncs.com",
         "user": "hotbit_make",
         "pass": "hotbit_make_20171205",
         "name": "hotbit_make_engine"
