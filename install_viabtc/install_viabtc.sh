@@ -4,20 +4,19 @@ basepath=$(cd `dirname $0`; pwd)
 projectpath=$(dirname $basepath)
 
 function install(){
-    if [ $1 = "accesshttp" ]; then
-        echo 1
-    elif [ $1 = "accessws" ] ; then
-        echo 1
-    elif [ $1 = "alertcenter" ] ; then
-        echo 1
-    elif [ $1 = "marketprice" ] ; then
-        echo 1
-    elif [ $1 = "matchengine" ] ; then
-        echo 1
-    elif [ $1 = "readhistory" ] ; then
-        echo 1
-    elif [ $1 = "all" ] ; then
-        processArray=("accesshttp" "accessws" "alertcenter" "marketprice" "matchengine" "readhistory")
+    processArray=("accesshttp" "accessws" "alertcenter" "marketprice" "matchengine" "readhistory" )
+      for process in ${processArray[@]}
+        do
+            if [ $1 = process ]; then
+                ./install_depends.sh
+                echo "begin compile $1"
+                cd $projectpath/process
+                make -j4
+                return 0
+            fi
+        done
+
+    if [ $1 = "all" ] ; then
         ./install_depends.sh
         echo "./install_depends.sh end"
         for process in ${processArray[@]}
@@ -25,9 +24,10 @@ function install(){
             cd $projectpath/process
             make -j4
         done
-    else
-        echo "A command that cannot be understood"
+        return 0
     fi
+
+    echo "A command that cannot be understood"
 }
 
 function uninstall(){
