@@ -386,6 +386,8 @@ int make_slice(time_t timestamp)
         return 0;
     }
 
+	log_trace("wr make_slice");
+
     int ret;
     ret = dump_to_db(timestamp);
     if (ret < 0) {
@@ -414,6 +416,7 @@ int init_persist(void)
 {
     nw_timer_set(&timer, 1.0, true, on_timer, NULL);
     nw_timer_start(&timer);
+	log_trace("start init_persist end");
 
     return 0;
 }
