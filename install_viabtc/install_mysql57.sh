@@ -10,4 +10,9 @@ fi
 
 yum install mysql-community-client mysql-community-devel -y
 
+mysqlclient="/usr/lib64/libmysqlclient.so"
+if  [ ! -f "$mysqlclient" ]; then
+    ln -s /usr/lib64/mysql/libmysqlclient.so $mysqlclient
+fi
+
 echo "install and mysqlclient complate"
