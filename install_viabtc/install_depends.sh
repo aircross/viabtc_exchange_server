@@ -10,7 +10,7 @@ if [ ! -f "/etc/yum.repos.d/epel-7.repo" ]; then
     yum makecache
 fi
 
-yum install librdkafka librdkafka-devel libcurl libcurl-devel libev libev-devel jansson jansson-devel mpdecimal mpdecimal-devel -y
+yum install librdkafka librdkafka-devel libcurl libcurl-devel libev libev-devel jansson jansson-devel mpdecimal mpdecimal-devel openssl openssl-devel -y
 
 cd $projectpath/depends/hiredis
 make -j4 && make install
