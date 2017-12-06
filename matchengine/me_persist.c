@@ -206,7 +206,9 @@ static int dump_balance_to_db(MYSQL *conn, time_t end)
 
 int update_slice_history(MYSQL *conn, time_t end)
 {
-    sds sql = sdsempty();
+	log_trace("wr 1243fgfgfffff");
+
+    sds sql = sdsempty();	
     sql = sdscatprintf(sql, "INSERT INTO `slice_history` (`id`, `time`, `end_oper_id`, `end_order_id`, `end_deals_id`) VALUES (NULL, %ld, %"PRIu64", %"PRIu64", %"PRIu64")",
             end, operlog_id_start, order_id_start, deals_id_start);
     log_info("update slice history to: %ld", end);
