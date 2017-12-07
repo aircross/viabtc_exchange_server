@@ -60,7 +60,6 @@ static int get_last_slice(MYSQL *conn, time_t *timestamp, uint64_t *last_oper_id
 static int load_slice_from_db(MYSQL *conn, time_t timestamp)
 {
     sds table = sdsempty();
-	log_trace("wr load_slice_from_db");
 
     table = sdscatprintf(table, "slice_order_%ld", timestamp);
     log_stderr("load orders from: %s", table);
@@ -84,7 +83,6 @@ static int load_slice_from_db(MYSQL *conn, time_t timestamp)
     }
 
     sdsfree(table);
-	log_trace("wr load_slice_from_db end");
     return 0;
 }
 
@@ -206,8 +204,6 @@ static int dump_balance_to_db(MYSQL *conn, time_t end)
 
 int update_slice_history(MYSQL *conn, time_t end)
 {
-	log_trace("wr 1243fgfgfffff");
-
     sds sql = sdsempty();	
     sql = sdscatprintf(sql, "INSERT INTO `slice_history` (`id`, `time`, `end_oper_id`, `end_order_id`, `end_deals_id`) VALUES (NULL, %ld, %"PRIu64", %"PRIu64", %"PRIu64")",
             end, operlog_id_start, order_id_start, deals_id_start);
@@ -386,8 +382,6 @@ int make_slice(time_t timestamp)
         return 0;
     }
 
-	log_trace("wr make_slice");
-
     int ret;
     ret = dump_to_db(timestamp);
     if (ret < 0) {
@@ -410,7 +404,6 @@ static void on_timer(nw_timer *timer, void *privdata)
         make_slice(now);
         last_slice_time = now;
     }
-	//log_trace("wr init_persist on_timer %ld ,%ld, %d", now, last_slice_time, settings.slice_interval);
 }
 
 int init_persist(void)

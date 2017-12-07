@@ -294,7 +294,6 @@ static int on_cmd_balance_update(nw_ses *ses, rpc_pkg *pkg, json_t *params)
         return reply_error_internal_error(ses, pkg);
     }
 
-	log_trace("wr on_cmd_balance_update 9");
 
     append_operlog("update_balance", params);
     return reply_success(ses, pkg);
