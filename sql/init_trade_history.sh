@@ -1,9 +1,9 @@
 #!/bin/bash
 
-MYSQL_HOST="localhost"
-MYSQL_USER="root"
-MYSQL_PASS="shit"
-MYSQL_DB="trade_history"
+MYSQL_HOST="rm-wz900j5wutr7o38di.mysql.rds.aliyuncs.com"
+MYSQL_USER="hotbit_make"
+MYSQL_PASS="hotbit_make_20171205"
+MYSQL_DB="hotbit_make_engine"
 
 for i in `seq 0 99`
 do
